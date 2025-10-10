@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Upload, Image as ImageIcon, Calendar, AlertCircle } from "lucide-react";
+import { Upload, Image as ImageIcon, Calendar, AlertCircle, CheckCircle2, Copy, Eye, Code } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ImageData {
@@ -159,22 +159,28 @@ const Clientes = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 gradient-soft">
+    <div className="min-h-screen py-20 gradient-animated">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4">
-            Área de <span className="text-gradient">Clientes</span>
+        <div className="text-center mb-12 fade-in">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6">
+            <Upload className="w-4 h-4 text-accent" />
+            <span className="text-sm text-primary-foreground">Base64 Converter</span>
+          </div>
+          <h1 className="text-5xl font-bold mb-4 text-primary-foreground">
+            Área de <span className="text-accent">Clientes</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
             Faça upload e converta suas imagens para Base64
           </p>
         </div>
 
         {/* Upload Section */}
-        <Card className="max-w-2xl mx-auto mb-12 border-border">
+        <Card className="max-w-2xl mx-auto mb-12 glass-card border-0 hover-lift fade-in-up">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Upload className="w-5 h-5 text-accent" />
+            <CardTitle className="flex items-center gap-2 text-primary-foreground">
+              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                <Upload className="w-5 h-5 text-accent" />
+              </div>
               Enviar Nova Imagem
             </CardTitle>
           </CardHeader>
@@ -185,12 +191,15 @@ const Clientes = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleFileSelect}
-                className="cursor-pointer"
+                className="cursor-pointer glass border-primary-foreground/20 text-primary-foreground"
               />
               {selectedFile && (
-                <p className="text-sm text-muted-foreground mt-2">
-                  Arquivo selecionado: <span className="font-semibold">{selectedFile.name}</span>
-                </p>
+                <div className="flex items-center gap-2 glass-card p-3 rounded-lg mt-3">
+                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
+                  <p className="text-sm text-primary-foreground">
+                    Arquivo selecionado: <span className="font-semibold">{selectedFile.name}</span>
+                  </p>
+                </div>
               )}
             </div>
 
@@ -200,15 +209,25 @@ const Clientes = () => {
               className="w-full"
               variant="gradient"
             >
-              {isUploading ? "Enviando..." : "Enviar Imagem"}
+              {isUploading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Enviar Imagem
+                </>
+              )}
             </Button>
 
-            <div className="flex items-start gap-2 p-4 bg-muted/50 rounded-lg">
+            <div className="flex items-start gap-2 glass p-4 rounded-lg">
               <AlertCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-primary-foreground/70">
                 <strong>Nota:</strong> Esta é uma demonstração. Configure o endpoint da API EC2 
-                no arquivo <code className="bg-background px-1 rounded">Clientes.tsx</code> 
-                (variável <code className="bg-background px-1 rounded">API_BASE_URL</code>) 
+                no arquivo <code className="glass px-1.5 py-0.5 rounded">Clientes.tsx</code> 
+                (variável <code className="glass px-1.5 py-0.5 rounded">API_BASE_URL</code>) 
                 para conectar com seu backend real.
               </p>
             </div>
@@ -216,16 +235,23 @@ const Clientes = () => {
         </Card>
 
         {/* Images List */}
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Imagens <span className="text-gradient">Enviadas</span>
-          </h2>
+        <div className="max-w-6xl mx-auto fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="flex items-center gap-3 mb-8 justify-center">
+            <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+              <ImageIcon className="w-5 h-5 text-accent" />
+            </div>
+            <h2 className="text-3xl font-bold text-primary-foreground">
+              Imagens <span className="text-accent">Enviadas</span>
+            </h2>
+          </div>
 
           {images.length === 0 ? (
-            <Card className="border-border">
+            <Card className="glass-card border-0">
               <CardContent className="py-12 text-center">
-                <ImageIcon className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                <p className="text-muted-foreground">
+                <div className="glass-card w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                  <ImageIcon className="w-12 h-12 text-accent opacity-50" />
+                </div>
+                <p className="text-primary-foreground/70">
                   Nenhuma imagem enviada ainda. Faça o upload da sua primeira imagem acima!
                 </p>
               </CardContent>
@@ -235,21 +261,22 @@ const Clientes = () => {
               {images.map((image, index) => (
                 <Card
                   key={index}
-                  className="cursor-pointer hover-lift border-border"
+                  className="cursor-pointer hover-lift glass-card border-0 group"
                   onClick={() => handleImageClick(image)}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start gap-3">
-                      <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg glass-strong flex items-center justify-center flex-shrink-0 group-hover:pulse-glow smooth-transition">
                         <ImageIcon className="w-6 h-6 text-accent" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold truncate mb-1">{image.name}</h3>
-                        <p className="text-sm text-muted-foreground flex items-center gap-1">
+                        <h3 className="font-semibold truncate mb-1 text-primary-foreground">{image.name}</h3>
+                        <p className="text-sm text-primary-foreground/60 flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {image.date}
                         </p>
                       </div>
+                      <Eye className="w-5 h-5 text-accent opacity-0 group-hover:opacity-100 smooth-transition" />
                     </div>
                   </CardContent>
                 </Card>
@@ -260,13 +287,18 @@ const Clientes = () => {
 
         {/* Base64 Preview */}
         {selectedImage && selectedImage.base64 && (
-          <div className="max-w-4xl mx-auto mt-12">
-            <Card className="border-border">
+          <div className="max-w-4xl mx-auto mt-12 fade-in">
+            <Card className="glass-card border-0 hover-lift">
               <CardHeader>
-                <CardTitle>Preview: {selectedImage.name}</CardTitle>
+                <CardTitle className="flex items-center gap-2 text-primary-foreground">
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                    <Eye className="w-5 h-5 text-accent" />
+                  </div>
+                  Preview: {selectedImage.name}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-muted p-4 rounded-lg">
+                <div className="glass p-4 rounded-lg">
                   <img
                     src={`data:image/png;base64,${selectedImage.base64}`}
                     alt={selectedImage.name}
@@ -275,11 +307,12 @@ const Clientes = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm font-semibold mb-2 block">
+                  <label className="text-sm font-semibold mb-2 block text-primary-foreground flex items-center gap-2">
+                    <Code className="w-4 h-4 text-accent" />
                     String Base64:
                   </label>
-                  <div className="bg-primary/5 p-4 rounded-lg border border-border">
-                    <code className="text-xs break-all block max-h-32 overflow-y-auto">
+                  <div className="glass-strong p-4 rounded-lg">
+                    <code className="text-xs break-all block max-h-32 overflow-y-auto text-primary-foreground/80">
                       {selectedImage.base64}
                     </code>
                   </div>
@@ -293,9 +326,10 @@ const Clientes = () => {
                       description: "Base64 copiado para a área de transferência.",
                     });
                   }}
-                  variant="outline"
+                  variant="hero"
                   className="w-full"
                 >
+                  <Copy className="w-4 h-4 mr-2" />
                   Copiar Base64
                 </Button>
               </CardContent>

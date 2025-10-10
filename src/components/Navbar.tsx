@@ -7,11 +7,13 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 smooth-transition">
-            <Cloud className="w-8 h-8 text-accent" />
+            <div className="relative">
+              <Cloud className="w-8 h-8 text-accent pulse-glow" />
+            </div>
             <span className="text-xl font-bold text-primary-foreground">
               Demay's <span className="text-accent">Infra</span>
             </span>
@@ -22,8 +24,8 @@ const Navbar = () => {
               to="/"
               className={`px-4 py-2 rounded-lg smooth-transition ${
                 isActive("/")
-                  ? "bg-accent text-accent-foreground"
-                  : "text-primary-foreground hover:bg-primary-foreground/10"
+                  ? "glass-card text-accent"
+                  : "text-primary-foreground hover:glass"
               }`}
             >
               Empresa
@@ -32,8 +34,8 @@ const Navbar = () => {
               to="/grupo"
               className={`px-4 py-2 rounded-lg smooth-transition ${
                 isActive("/grupo")
-                  ? "bg-accent text-accent-foreground"
-                  : "text-primary-foreground hover:bg-primary-foreground/10"
+                  ? "glass-card text-accent"
+                  : "text-primary-foreground hover:glass"
               }`}
             >
               Grupo
@@ -42,8 +44,8 @@ const Navbar = () => {
               to="/clientes"
               className={`px-4 py-2 rounded-lg smooth-transition ${
                 isActive("/clientes")
-                  ? "bg-accent text-accent-foreground"
-                  : "text-primary-foreground hover:bg-primary-foreground/10"
+                  ? "glass-card text-accent"
+                  : "text-primary-foreground hover:glass"
               }`}
             >
               Área de Clientes

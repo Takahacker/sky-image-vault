@@ -116,4 +116,117 @@ All colors MUST be HSL.
   .smooth-transition {
     @apply transition-all duration-300 ease-in-out;
   }
+
+  /* Animated gradient background */
+  .gradient-animated {
+    background: linear-gradient(-45deg, #1a1f3a, #2d1f3f, #1f2d3f, #d97757);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Float animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Fade in animations */
+  .fade-in {
+    animation: fadeIn 0.8s ease-in;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Pulse glow */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(217, 119, 87, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(217, 119, 87, 0.6);
+    }
+  }
+
+  /* Rotate animation */
+  .rotate-slow {
+    animation: rotateSlow 20s linear infinite;
+  }
+
+  @keyframes rotateSlow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
