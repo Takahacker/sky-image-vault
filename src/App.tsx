@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Grupo from "./pages/Grupo";
-import Clientes from "./pages/Clientes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -18,13 +17,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
+  <div className="flex flex-col min-h-screen gradient-animated">
           <Navbar />
-          <main className="flex-1 pt-16">
+          {/* Use the navbar CSS variable for top padding so content sits below the fixed header */}
+          <main className="flex-1" style={{ paddingTop: 'var(--navbar-height, 5rem)' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/grupo" element={<Grupo />} />
-              <Route path="/clientes" element={<Clientes />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+// Use external clients URL from Vite env at build time; fallback to internal route
+const clientsUrl = (import.meta.env.VITE_CLIENTS_URL as string) ?? "/clientes";
 import { ArrowRight, Cloud, Server, Database, Shield, Zap, Lock, Cpu, Globe } from "lucide-react";
-import heroImage from "@/assets/hero-cloud.jpg";
 
 const Home = () => {
   return (
-    <div className="min-h-screen gradient-animated">
+  <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[600px] flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0 z-0 opacity-20"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
+      <section
+        className="relative min-h-[600px] flex items-center overflow-hidden"
+        style={{
+          // pull the hero up behind the fixed header while keeping its content visible
+          marginTop: 'calc(var(--navbar-height, 5rem) * -1)',
+          paddingTop: 'var(--navbar-height, 5rem)'
+        }}
+      >
+  {/* background comes from App root; keep hero overlays only */}
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl fade-in-up">
@@ -33,12 +33,12 @@ const Home = () => {
               Transformamos imagens em Base64 com a potência da AWS. Soluções em
               nuvem que crescem com seu negócio.
             </p>
-            <Link to="/clientes">
-              <Button variant="hero" size="lg" className="text-lg hover-lift pulse-glow">
+            <a href={clientsUrl} {...(clientsUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+              <Button variant="hero-invert" size="lg" className="text-lg hover-lift pulse-glow">
                 Acessar Área de Clientes
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -178,12 +178,12 @@ const Home = () => {
               Acesse nossa área de clientes e experimente a conversão de imagens
               para Base64 com a infraestrutura AWS.
             </p>
-            <Link to="/clientes">
-              <Button variant="hero" size="lg" className="text-lg hover-lift pulse-glow">
+            <a href={clientsUrl} {...(clientsUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+              <Button variant="hero-invert" size="lg" className="text-lg hover-lift pulse-glow">
                 Começar Agora
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

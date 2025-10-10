@@ -8,6 +8,9 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* fallback navbar height if component doesn't set it */
+    --navbar-height: calc(env(safe-area-inset-top, 0px) + 5rem);
+
     --background: 0 0% 100%;
     --foreground: 220 30% 15%;
 
@@ -84,26 +87,47 @@ All colors MUST be HSL.
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight;
   }
 }
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-start)),
+      hsl(var(--gradient-end))
+    );
   }
 
   .gradient-overlay {
-    background: linear-gradient(135deg, hsl(var(--gradient-overlay)) 0%, hsl(var(--gradient-end)) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-overlay)) 0%,
+      hsl(var(--gradient-end)) 100%
+    );
   }
 
   .gradient-soft {
-    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--muted)) 100%
+    );
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -119,9 +143,15 @@ All colors MUST be HSL.
 
   /* Animated gradient background */
   .gradient-animated {
-    background: linear-gradient(-45deg, #1a1f3a, #2d1f3f, #1f2d3f, #d97757);
+    /* Animated gradient using the design system HSL variables */
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-start) / 1) 0%,
+      hsl(var(--gradient-overlay) / 0.8) 40%,
+      hsl(var(--gradient-end) / 1) 100%
+    );
     background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
+    animation: gradient-shift 12s ease infinite;
   }
 
   @keyframes gradient-shift {
@@ -165,7 +195,8 @@ All colors MUST be HSL.
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
@@ -208,7 +239,8 @@ All colors MUST be HSL.
   }
 
   @keyframes pulseGlow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 20px rgba(217, 119, 87, 0.4);
     }
     50% {

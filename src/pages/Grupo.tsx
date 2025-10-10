@@ -1,34 +1,26 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { User, Code, Cloud, Layers, Sparkles } from "lucide-react";
+import { User, Code, Cloud, Layers, Sparkles, Github, Linkedin } from "lucide-react";
+
+// Import team images so Vite bundles them and returns correct URLs for production
+import GustavoImg from "@/assets/Gustavo.png";
+import MarcosImg from "@/assets/Marcos.png";
 
 const teamMembers = [
   {
-    name: "João Silva",
-    role: "Cloud Architect",
-    course: "Engenharia de Computação",
+    name: "Gustavo Takahashi",
+    role: "Engenharia de Computação Insper",
+    course: "6º Semestre",
     description: "Especialista em arquiteturas AWS e infraestrutura escalável",
+    img: GustavoImg,
     icon: Cloud,
   },
   {
-    name: "Maria Santos",
-    role: "DevOps Engineer",
-    course: "Ciência da Computação",
-    description: "Focada em automação e CI/CD pipelines",
+    name: "Marcos Costa",
+    role: "Engenharia de Computação Insper",
+    course: "6º Semestre",
+    description: "Especialista em arquiteturas AWS e infraestrutura escalável",
+    img: MarcosImg,
     icon: Layers,
-  },
-  {
-    name: "Pedro Costa",
-    role: "Backend Developer",
-    course: "Sistemas de Informação",
-    description: "Desenvolvimento de APIs e integração de serviços",
-    icon: Code,
-  },
-  {
-    name: "Ana Oliveira",
-    role: "Frontend Developer",
-    course: "Engenharia de Software",
-    description: "Criação de interfaces modernas e responsivas",
-    icon: Sparkles,
   },
 ];
 
@@ -49,7 +41,8 @@ const Grupo = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+  {/* Center the two member cards and keep responsive layout for larger screens */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16 justify-center items-start">
           {teamMembers.map((member, index) => {
             const IconComponent = member.icon;
             return (
@@ -63,8 +56,8 @@ const Grupo = () => {
                     <div className="absolute inset-0 opacity-20">
                       <IconComponent className="w-full h-full rotate-slow opacity-10" />
                     </div>
-                    <div className="w-20 h-20 rounded-full glass-strong flex items-center justify-center relative z-10 float">
-                      <User className="w-10 h-10 text-primary-foreground" />
+                    <div className="w-24 h-24 rounded-full glass-strong flex items-center justify-center relative z-10 float overflow-hidden">
+                      <img src={member.img} alt={`${member.name} avatar`} className="w-full h-full object-cover" />
                     </div>
                   </div>
                   <div className="p-6">
@@ -79,6 +72,16 @@ const Grupo = () => {
                     <p className="text-sm text-primary-foreground/70 leading-relaxed">
                       {member.description}
                     </p>
+
+                    {/* Social buttons: same style as Footer but localized to the card */}
+                    <div className="flex items-center gap-3 mt-4">
+                      <a href="#" className="glass-card p-2 rounded-lg hover:glass-strong smooth-transition" aria-label={`${member.name} GitHub`}>
+                        <Github className="w-5 h-5 text-primary-foreground/70 hover:text-accent smooth-transition" />
+                      </a>
+                      <a href="#" className="glass-card p-2 rounded-lg hover:glass-strong smooth-transition" aria-label={`${member.name} LinkedIn`}>
+                        <Linkedin className="w-5 h-5 text-primary-foreground/70 hover:text-accent smooth-transition" />
+                      </a>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
