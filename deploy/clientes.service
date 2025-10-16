@@ -1,0 +1,18 @@
+[Unit]
+Description=Clientes static site (Python http.server)
+After=network.target
+
+[Service]
+Type=simple
+# Run as www-data (create user/group on EC2 if it doesn't exist)
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/clientes
+# Serves files on port 8080; change to 80 if you prefer (requires root or capability)
+ExecStart=/usr/bin/python3 -m http.server 8080 --bind 0.0.0.0
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
