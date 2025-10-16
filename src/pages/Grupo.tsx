@@ -1,17 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Code, Cloud, Layers, Sparkles, Github, Linkedin } from "lucide-react";
 
-// Import team images so Vite bundles them and returns correct URLs for production
-import GustavoImg from "@/assets/Gustavo.png";
-import MarcosImg from "@/assets/Marcos.png";
-
 const teamMembers = [
   {
     name: "Gustavo Takahashi",
     role: "Engenharia de Computação Insper",
     course: "6º Semestre",
     description: "Especialista em arquiteturas AWS e infraestrutura escalável",
-    img: GustavoImg,
+    img: "/src/assets/Gustavo.png",
     icon: Cloud,
   },
   {
@@ -19,7 +15,7 @@ const teamMembers = [
     role: "Engenharia de Computação Insper",
     course: "6º Semestre",
     description: "Especialista em arquiteturas AWS e infraestrutura escalável",
-    img: MarcosImg,
+    img: "/src/assets/Marcos.png",
     icon: Layers,
   },
 ];

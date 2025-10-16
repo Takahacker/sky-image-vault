@@ -18,8 +18,8 @@ const Clientes = () => {
   const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
 
-  // Placeholder API endpoint - replace with your actual EC2 API
-  const API_BASE_URL = "https://your-ec2-instance.com/api";
+  // API base URL: prefer Vite env var (set VITE_CLIENTS_URL at build), fallback to placeholder
+  const API_BASE_URL = (import.meta.env.VITE_CLIENTS_URL as string) ?? "https://your-ec2-instance.com/api";
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
