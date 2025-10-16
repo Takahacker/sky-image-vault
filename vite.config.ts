@@ -1,18 +1,20 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   base: "./",
-  server: {
-    host: "::",
-    port: 8080,
+  build: {
+    rollupOptions: {
+      input: path.resolve(__dirname, "clientes.html"),
+    },
+    outDir: "dist-clientes",
+    emptyOutDir: true,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"), // 👈 isso ensina o Vite o que é "@"
     },
   },
-}));
+});
